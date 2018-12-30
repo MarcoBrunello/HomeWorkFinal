@@ -12,6 +12,7 @@
 #define SERVERPORT 2019
 #define SERVERADDRESS "127.0.0.1"
 #define MAX_LINE_LENGTH 80
+#define IP_LENGTH 15
 
 int main(int argc, char *argv[])
 {
@@ -23,7 +24,7 @@ int main(int argc, char *argv[])
 	int prevTime=0;
 	FILE *device_file;
     char line[MAX_LINE_LENGTH]; 
-	char address[15]; 
+	char address[IP_LENGTH]; 
 	
 	if (argc == 2){
 			strcpy(address,argv[1]);

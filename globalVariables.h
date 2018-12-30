@@ -3,6 +3,7 @@
 
 extern int count1;
 extern int count2;
+extern int serverSocket;
 extern struct node *deviceInput;
 extern struct node *devicePosition;
 extern struct node *remoteDeviceInput;

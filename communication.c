@@ -82,7 +82,6 @@ void modelComm(Positions *posit){
 			 posit->positionToPrint = posit->localPosition;
 		 }
 		 
-		 if(notDone){ 
 		 pthread_mutex_lock(&devPos);     //As producer
 		 devicePosition = addToList(devicePosition, posit->positionToPrint, posit->timeToPrint);
 		 count1=1;
@@ -90,6 +89,6 @@ void modelComm(Positions *posit){
 		 pthread_cond_signal(&notEmptyViewer);
 		 pthread_cond_signal(&notEmptyController);
 		 pthread_mutex_unlock(&devPos);	 
-	    }
+	 
 }
 

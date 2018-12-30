@@ -24,6 +24,7 @@
 
 int count1=0;
 int count2=0;
+int serverSocket;
 pthread_mutex_t devInp = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t devPos = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t notEmpty=PTHREAD_COND_INITIALIZER;
@@ -36,7 +37,7 @@ struct node *remoteDeviceInput=NULL;
 
 
 void remoteDeviceFunc( void *arg){       //THREAD REMOTE INTERFACE
-    int serverSocket, connectSocket;                                
+    int connectSocket;                                
  	int returnCode;
 	socklen_t clientAddrLen;
 	struct sockaddr_in serverAddr, clientAddr;
@@ -56,12 +57,12 @@ void remoteDeviceFunc( void *arg){       //THREAD REMOTE INTERFACE
 	
 	if ((returnCode = bind (serverSocket, (struct sockaddr*)  &serverAddr, sizeof(serverAddr))) == -1){
 		perror("Error in server socket bind()");
-		exit(EXIT_FAILURE);
+		pthread_exit(NULL);
 	}
 
 	if ((returnCode = listen(serverSocket, 1)) == -1){
 		perror("Error in server socket listen()");
-		exit(EXIT_FAILURE);
+		pthread_exit(NULL);
 	}	
 	
 	printf("Server ready\n");
@@ -114,7 +115,7 @@ void viewerFunc(void *inp){                           //THREAD VIEWER
 
 void controllerFunc( void *inp){                   //THREAD CONTROLLER
 	Input* input= inp;
-	FILE *output_file = fopen("output.txt", "a"); 
+	FILE *output_file = fopen("output.txt", "w"); 
 	Output out;
 	
 	while(notDone){
@@ -142,9 +143,6 @@ void interfaceFunc(void *arg){                         //THREAD INTERFACE
     int t;
 	int prevTime=0;
     double change;
-	
-	while(remoteOff){
-	}
 	
     while ( fgets(line, sizeof(line), device_file)  && notDone) {
         sscanf(line, "%d %lf", &t, &change);

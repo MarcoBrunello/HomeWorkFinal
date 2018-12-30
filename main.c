@@ -32,6 +32,7 @@ static void handlerFunc(void *arg){
 	
 	if(sigCaught == SIGINT){
 	   notDone = false;
+	   close(serverSocket);
 	}
 	pthread_exit(NULL);
 }
