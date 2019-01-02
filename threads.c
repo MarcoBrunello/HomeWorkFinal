@@ -47,7 +47,7 @@ void remoteDeviceFunc( void *arg){       //THREAD REMOTE INTERFACE
 	
 	if (((serverSocket = socket(AF_INET,SOCK_STREAM,0))) == -1){
 		perror("Error in server socket()");
-		exit(EXIT_FAILURE);
+		pthread_exit(NULL);
 	}
 		
 	serverAddr.sin_family = AF_INET;
@@ -68,7 +68,6 @@ void remoteDeviceFunc( void *arg){       //THREAD REMOTE INTERFACE
 	printf("Server ready\n");
 	clientAddrLen = sizeof(clientAddr);
 		if ((connectSocket = accept(serverSocket, (struct sockaddr *)&clientAddr, &clientAddrLen)) == -1){
-			printf("Connection closed, remote interface closed\n");
 		    pthread_cond_signal(&notEmpty);
 		    pthread_exit(NULL);
 		}
@@ -89,7 +88,6 @@ void remoteDeviceFunc( void *arg){       //THREAD REMOTE INTERFACE
 		if(!notFinish)
 	    notDone = false;
 	    notFinish=false;
-		printf("Connection closed, remote interface closed\n");
 		pthread_cond_signal(&notEmpty);
 		pthread_exit(NULL);
 }
@@ -106,7 +104,6 @@ void viewerFunc(void *inp){                           //THREAD VIEWER
 	sleep(input->cycleTimeViewer);
 	}
 	
-	printf("Viewer Thread closed\n");
 	pthread_exit(NULL);
 	
 }
@@ -123,7 +120,6 @@ void controllerFunc( void *inp){                   //THREAD CONTROLLER
 	}
 	fclose(output_file);
 	
-	printf("Controller Thread closed\n");
 	pthread_exit(NULL);
 }
 
@@ -157,7 +153,6 @@ void interfaceFunc(void *arg){                         //THREAD INTERFACE
 	notDone = false;
     notFinish=false;
 	pthread_cond_signal(&notEmpty);	
-	printf("Interface Thread closed\n");
 	pthread_exit(NULL);
 }	
 
@@ -171,7 +166,6 @@ pos.remotePosition = 0;
 	while(notDone){
 		modelComm(&pos);
 	}
-	printf("Model Thread closed\n");
 	pthread_exit(NULL);
 		
 }  
