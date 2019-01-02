@@ -115,7 +115,6 @@ int main(int argc, char **argv){
 	remoteDeviceInput=destroy(remoteDeviceInput);
 	deviceInput=destroy(deviceInput);
 	devicePosition=destroy(devicePosition);
-	printf("\n\nThis is the end, beautiful friend\n");
 	exit(EXIT_SUCCESS);
 }
 	

@@ -68,7 +68,6 @@ void remoteDeviceFunc( void *arg){       //THREAD REMOTE INTERFACE
 	printf("Server ready\n");
 	clientAddrLen = sizeof(clientAddr);
 		if ((connectSocket = accept(serverSocket, (struct sockaddr *)&clientAddr, &clientAddrLen)) == -1){
-			perror("Error in accept()");
 			printf("Connection closed, remote interface closed\n");
 		    pthread_cond_signal(&notEmpty);
 		    pthread_exit(NULL);
@@ -81,9 +80,8 @@ void remoteDeviceFunc( void *arg){       //THREAD REMOTE INTERFACE
 		sscanf(buffer, "%d %lf", &t, &change);
 		pthread_mutex_lock(&devInp);
 		remoteDeviceInput = addToList(remoteDeviceInput, change, t);
-		pthread_cond_signal(&notEmpty);
 		pthread_mutex_unlock(&devInp);
-		
+		pthread_cond_signal(&notEmpty);
 		}
 		close(connectSocket);
 		
@@ -149,8 +147,8 @@ void interfaceFunc(void *arg){                         //THREAD INTERFACE
 		sleep(t - prevTime);
 		pthread_mutex_lock(&devInp);
 		deviceInput = addToList(deviceInput, change, t);
-		pthread_cond_signal(&notEmpty);
 		pthread_mutex_unlock(&devInp);
+		pthread_cond_signal(&notEmpty);
 		prevTime = t;
 		
 		}
