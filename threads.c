@@ -21,6 +21,7 @@
 #define MAXBUF 32
 #define SERVERPORT 2019
 #define SERVERADDRESS "127.0.0.1"
+#define T_CYCLE 0.1
 
 int count1=0;
 int count2=0;
@@ -101,7 +102,7 @@ void viewerFunc(void *inp){                           //THREAD VIEWER
 	viewerComm(&out);
 	checkPosition(inp, &out);
 	printOutputViewer(&out);
-	sleep(input->cycleTimeViewer);
+	sleep(input->cycleTimeViewer*T_CYCLE);
 	}
 	
 	pthread_exit(NULL);
@@ -116,7 +117,7 @@ void controllerFunc( void *inp){                   //THREAD CONTROLLER
 	while(notDone){
     controllerComm(&out);
 	printOutputController(output_file, &out, inp);
-	sleep(input->cycleTimeController);
+	sleep(input->cycleTimeController*T_CYCLE);
 	}
 	fclose(output_file);
 	

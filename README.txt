@@ -3,8 +3,8 @@ Per compilare il dispositivo remoto "gcc -Wall -o remoteDevice remoteDevice.c"
 
 Il software dispone di 6 thread, model, controller, viewer e due interfacce (una per leggere i dati dal dispositivo locale e l'altra per ricevere dal dispositivo remoto),
 più la thread per ascoltare il sigint. Avviare prima l'homework da linea di comando con i parametri come da specifica (altrimenti va in errore e termina), i tempi sono
-calcolati in secondi (è stato usato uno sleep) quindi evitare di dare tempi cicli troppo lunghi per avere un output ragionevole (da 1 a 5 va benissimo, se infatti è troppo 
-alto ho impostato che quando terminano entrambe le letture venga inizializzata la chiusura, e se le thread dormono non vengono visualizzati tutti i dati).
+calcolati in decimi di secondo (è stato usato uno sleep*0.1) quindi evitare di dare tempi cicli troppo alti per avere un output ragionevole (da 10 a 30 va benissimo, se
+infatti è troppo alto ho impostato che quando terminano entrambe le letture venga inizializzata la chiusura, e se le thread dormono non vengono visualizzati tutti i dati).
 All'avvio il file homework comincerà a leggere i dati dal file device.txt mostrando in maniera approssimativa la posizione rispetto le due pareti date, se 
 la posizione è fuori le pareti mostrerà la X sulla parete (la posizione reale viene scritta accompagnata dal tempo).  L'output del controller invece sarà visualizzato 
 nel file output.txt nella directory del file compilato. Se tutto è andato bene all'avvio comparirà "Server Ready" ad indicare che si è in grado di ricevere posizioni da 
