@@ -1,1 +1,7 @@
 Time 2  Position 0.500000
+Time 3  Position 0.700000
+Time 3  Position 0.700000
+Time 4  Position 0.470000
+Time 5  Position 0.870000
+Time 7  Position 1.170000
+Time 7  Position 1.170000

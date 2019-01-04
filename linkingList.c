@@ -8,7 +8,7 @@ newNode = malloc(sizeof(struct node*));
 newNode->position = pos;
 newNode->time = t;
 newNode->next=list;
-list = newNode; //Next node
+list = newNode; 
 return newNode;
 }
 
@@ -21,17 +21,17 @@ struct node* searchTime(struct node* list, int t){
 	return NULL;
 }
 
-struct node* deleteNode(struct node* list, int t){ //times must be different
+struct node* deleteNode(struct node* list, int t){ 
 struct node *cur, *prev;
 cur=list;
 prev=NULL;
-while((cur != NULL) && (cur->time != t)){ // To scroll the list until it finds the node we want to delete
+while((cur != NULL) && (cur->time != t)){ 
 	prev = cur;  
 	cur = cur->next;
 }
-	if(cur == NULL) //cur points at null, t is not found
+	if(cur == NULL) 
 		return list;
-	if(prev == NULL) // condition in while is true, so t is in the first node
+	if(prev == NULL) 
 		list = list->next;
 	else
 		prev->next = cur->next;
@@ -40,7 +40,7 @@ while((cur != NULL) && (cur->time != t)){ // To scroll the list until it finds t
 }
 
 struct node* getHead(struct node* element){
-	while((element->next != NULL)){ // To scroll the list until it finds the node we want to get
+	while((element->next != NULL)){ 
 	element=element->next;
     }
 	return element;
